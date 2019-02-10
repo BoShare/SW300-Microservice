@@ -1,0 +1,1 @@
+insert into theory values(1L, 'Test', 'This is Test' )

@@ -40,7 +40,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'de.codecentric:spring-boot-admin-starter-client'
- //   implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 //	implementation 'org.springframework.cloud:spring-cloud-starter-eureka'
 //    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
@@ -48,6 +48,8 @@ dependencies {
 //    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
     implementation 'org.springframework.data:spring-data-rest-hal-browser'
     implementation 'org.apache.commons:commons-lang3'
+    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
         // Spring Cloud Connectors
     compile "org.springframework.cloud:spring-cloud-spring-service-connector:${springCloudConnectorsVersion}"
     compile "org.springframework.cloud:spring-cloud-cloudfoundry-connector:${springCloudConnectorsVersion}"

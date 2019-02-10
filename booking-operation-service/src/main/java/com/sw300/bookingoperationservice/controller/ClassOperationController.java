@@ -12,6 +12,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,7 @@ import com.sw300.bookingoperationservice.service.PaymentMethod;
 import com.sw300.bookingoperationservice.service.PaymentMethodRepository;
 import com.sw300.bookingoperationservice.service.PaymentRepository;
 
+@RefreshScope
 @RestController
 public class ClassOperationController {
 	

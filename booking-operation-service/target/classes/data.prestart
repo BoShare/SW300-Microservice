@@ -1,0 +1,11 @@
+# Customer Table
+# ID / Email / First_Name / Industry / Job / Last_Name / Membership / phone /Payment_method_id
+
+# enrollment table
+# clazz_id, customer_id, date, grade, status
+
+# payment table
+# id, amount, date, payment_method_id
+
+#payment_method table
+# id, account, type, customer_id

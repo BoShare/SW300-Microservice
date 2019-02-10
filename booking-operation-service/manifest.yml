@@ -1,8 +1,9 @@
 ---
 applications:
-- name: bookingservice
-  memory: 512M
+- name: booking-service
+  memory: 1G
 #  random-route: true
   path: build/libs/booking-operation-service-0.0.1-SNAPSHOT.jar
+  timeout: 180
   env:
     JAVA_OPTS: -Xss349k

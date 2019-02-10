@@ -1,0 +1,37 @@
+#H2
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2
+spring.jpa.show-sql=true
+#spring.jpa.generate-ddl=true
+
+server.port=80
+
+spring.application.name=booking-service
+#eureka.client.service-url.defaultZone: http://localhost:8761/eureka
+management.endpoints.web.exposure.include=*
+
+eureka.client.serviceUrl.defaultZone=http://service-registry.bosh-lite.com/eureka/
+eureka.instance.hostname=${vcap.application.uris[0]}
+eureka.instance.nonSecurePort=80
+eureka.instance.metadataMap.instanceId=${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+eureka.instance.instance-id=${vcap.application.uris[0]}
+
+#spring.h2.console.enabled=true
+#spring.h2.console.path=/h2
+## Datasource
+#
+spring.jpa.database=H2
+spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+spring.datasource.username=sa
+spring.datasource.password=
+spring.datasource.driver-class-name=org.h2.Driver
+#spring.jpa.hibernate.ddl-auto=update
+
+##################################################################################
+
+spring.zipkin.baseUrl=http://zipkin-service.bosh-lite.com/   # Zipkin 서버 정보
+spring.sleuth.sampler.rate=1
+
+spring.cloud.config.discovery.enabled=true
+spring.cloud.config.discovery.service-id=config-service # eureka에 등록된 config service 이름
+

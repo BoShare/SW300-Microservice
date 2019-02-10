@@ -1,0 +1,56 @@
+server:
+  port: 80
+#H2
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  jpa:
+    show-sql: true
+    database: H2
+  application:
+    name: development-service    
+#spring.jpa.generate-ddl=true
+
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: 
+    driver-class-name: org.h2.Driver
+    
+##################################################################################
+
+  zipkin:
+    baseUrl: http://zipkin-service.bosh-lite.com/   # Zipkin 서버 정보
+  sleuth:
+    sampler:
+      probability: 1.0
+
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-service # eureka에 등록된 config service 이름
+    
+
+
+
+
+#eureka.client.service-url.defaultZone: http://localhost:8761/eureka
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://service-registry.bosh-lite.com/eureka/
+  instance:
+    hostname: ${vcap.application.uris[0]}
+    nonSecurePort: 80
+    metadataMap:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+    instance-id: ${vcap.application.uris[0]}

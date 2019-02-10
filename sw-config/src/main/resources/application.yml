@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/BoShare/spring-cloud-config-repository.git # git repository 주소
+          username: bkseo74@gmail.com
+          password: qhrnrseo74
+#server:
+#  port: 8888
+
+# Eureka(service discovery)를 사용할 경우 아래 설정 추가
+#eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://service-registry.bosh-lite.com/eureka/
+  instance:
+    hostname: ${vcap.application.uris[0]}
+    nonSecurePort: 80
+    metadataMap:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+    instance-id: ${vcap.application.uris[0]}

@@ -1,8 +1,9 @@
 ---
 applications:
 - name: scheduling-service
-  memory: 512M
+  memory: 1G
 #  random-route: true
   path: build/libs/scheduling-service-0.0.1-SNAPSHOT.jar
+  timeout: 180
   env:
     JAVA_OPTS: -Xss349k

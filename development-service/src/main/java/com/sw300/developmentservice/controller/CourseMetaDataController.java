@@ -10,6 +10,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,15 @@ import com.sw300.developmentservice.service.PracticeRepository;
 import com.sw300.developmentservice.service.Theory;
 import com.sw300.developmentservice.service.TheoryRepository;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
+@RefreshScope
 @RestController
+@Api(value="This is Course Metat Data Information")
 public class CourseMetaDataController {
 	
 	@Autowired
@@ -266,15 +275,25 @@ public class CourseMetaDataController {
 	
 	//모든 정보 가져오
 	@GetMapping("/theories")
+	@ApiOperation(value = "View a list of available Theories", response = Iterator.class)
+	@ApiResponses(value = {
+	    @ApiResponse(code = 200, message = "Successfully retrieved list"),
+	    @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+	    @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+	    @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	})
 	public Iterator<Theory> retrieveTheoryAll() {
 		
 		return theoryRepository.findAll().iterator();
 		
 	}
 	
-	//customer ID에 따른 결과 
+	//Theory ID에 따른 결과 
 	@GetMapping("/theories/{id}")
-	public Resource<Theory> retrieveTheory (@PathVariable long id) {
+	@ApiOperation(value = "Get a theory object form theory id")
+	public Resource<Theory> retrieveTheory (
+			@ApiParam(value = "theory Id from which theory object will get from database table", required = true) 
+			@PathVariable long id) {
 		Optional<Theory> theories = theoryRepository.findById(id);
 		if (!theories.isPresent())
 			throw new CustomizedNotFoundException("id - " + id);
@@ -290,9 +309,12 @@ public class CourseMetaDataController {
 		
 	}
 	
-	//Data insert를 위한 부
+	//Data insert 
 	@PostMapping("/theories")
-	public ResponseEntity<Object> createTheory (@Valid @RequestBody Theory theory) {
+    @ApiOperation(value = "Add an theory")
+	public ResponseEntity<Object> createTheory (
+			@ApiParam(value = "Theory object store in database table", required = true) 
+			@Valid @RequestBody Theory theory) {
 		
 		theoryRepository.save(theory);
 	
@@ -307,7 +329,10 @@ public class CourseMetaDataController {
 	} 
 	
 	@DeleteMapping("/theories/{id}")
-	public void deleteTheory (@PathVariable long id) {
+	@ApiOperation(value = "Delete a theory")
+	public void deleteTheory (
+			@ApiParam(value = "theory Id from which theory object will delete from database table", required = true) 
+			@PathVariable long id) {
 		
 		Optional<Theory> theories = theoryRepository.findById(id);
 		if (!theories.isPresent())

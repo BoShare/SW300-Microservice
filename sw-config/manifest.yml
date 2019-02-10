@@ -1,0 +1,7 @@
+---
+applications:
+- name: config-service
+  memory: 512M
+  path: target/sw-config-0.0.1-SNAPSHOT.jar
+  env:
+    JAVA_OPTS: -Xss349k

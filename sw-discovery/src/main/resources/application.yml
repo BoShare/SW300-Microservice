@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: service-registry
+#server.port=8761
+
+#eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://service-registry.bosh-lite.com/eureka/
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    enable-self-preservation: true
+#eureka.instance.ip-address=true
+#eureka.instance.preferIpAddress=true
+#management.security.enabled=false
+  instance:
+    hostname: ${vcap.application.uris[0]}
+    nonSecurePort: 80
+    metadataMap:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
